@@ -46,7 +46,8 @@ def get_permitted_distance(customer):
 	if not customer:
 		return None
 
-	permitted_distance = frappe.db.get_value("Customer", customer, "permitted_booking_distance")
+	customer_group = frappe.db.get_value("Customer", customer, "customer_group")
+	permitted_notice = frappe.db.get_value("Customer Group", customer_group, "custom_permitted_booking_notice")
 
 	if permitted_distance is None:
 		return None
