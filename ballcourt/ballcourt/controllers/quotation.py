@@ -1,6 +1,6 @@
 import frappe
 from frappe import _
-from frappe.utils import date_diff, get_datetime, now_datetime
+from frappe.utils import get_datetime, now_datetime
 
 
 def enforce_booking_notice(quotation, method):
@@ -8,40 +8,45 @@ def enforce_booking_notice(quotation, method):
 	Enforces that customers can only book within their allowed advance booking window.
 	Raises an exception if the booking is too far in advance.
 	"""
-	permitted_notice_days = get_permitted_notice(quotation.customer)
+	permitted_notice_seconds = get_permitted_notice(quotation.customer)
 
-	if not permitted_notice_days:
+	if not permitted_notice_seconds:
 		return
 
 	if not quotation.items:
 		return
 
-	booking_notice_days = calculate_booking_notice(frappe.get_doc("Resource Booking", quotation.items[-1].item_booking))
+	booking_notice_seconds = calculate_booking_notice(frappe.get_doc("Resource Booking", quotation.items[-1].item_booking))
 
-	if booking_notice_days > permitted_notice_days:
+	if booking_notice_seconds > permitted_notice_seconds:
+		message = format_duration_message(booking_notice_seconds, permitted_notice_seconds)
 		frappe.throw(
-			_(f"This booking is {booking_notice_days} days in advance, but your tier only allows bookings up to {permitted_notice_days} days in advance."),
+			_(message),
 			title=_("Booking Too Far in Advance")
 		)
 
 def calculate_booking_notice(resource_booking):
 	"""
-	Calculates the number of days between now and the earliest booking item date.
-	Returns the notice in days (integer).
+	Calculates the number of seconds between now and the earliest booking item date.
+	Returns the notice in seconds (integer).
 	"""
 	if not resource_booking:
 		return 0
 
-	# Calculate difference in days
-	days_difference = date_diff(resource_booking.starts_on, now_datetime())
+	# Get the start datetime and current datetime
+	start_datetime = get_datetime(resource_booking.starts_on)
+	current_datetime = now_datetime()
 
-	# Return the number of days (minimum 0 if booking is in the past/same day)
-	return max(0, days_difference)
+	# Calculate difference in seconds
+	time_difference = (start_datetime - current_datetime).total_seconds()
+
+	# Return the number of seconds (minimum 0 if booking is in the past)
+	return max(0, int(time_difference))
 
 def get_permitted_notice(customer):
 	"""
-	Retrieves the permitted booking notice (in days) for a customer.
-	Returns None if not set, or the number of days as an integer.
+	Retrieves the permitted booking notice (in seconds) for a customer.
+	Returns None if not set, or the number of seconds as an integer.
 	"""
 	if not customer:
 		return None
@@ -52,8 +57,52 @@ def get_permitted_notice(customer):
 	if permitted_notice is None:
 		return None
 
-	# Ensure we return an integer
+	# Duration fields return seconds, ensure we return an integer
 	try:
 		return int(permitted_notice)
 	except (ValueError, TypeError):
 		return None
+
+def format_duration_message(booking_seconds, permitted_seconds):
+	"""
+	Formats a complete error message about booking notice.
+	The format is determined by the permitted_seconds value:
+	- If permitted is in full days (no hours), show days only
+	- If permitted is in hours only (no days), show hours only
+	- If permitted has both days and hours, show both
+	"""
+	# Calculate booking duration components
+	booking_days = booking_seconds // 86400
+	booking_remaining = booking_seconds % 86400
+	booking_hours = booking_remaining // 3600
+
+	# Calculate permitted duration components
+	permitted_days = permitted_seconds // 86400
+	permitted_remaining = permitted_seconds % 86400
+	permitted_hours = permitted_remaining // 3600
+
+	# If permitted has both days and hours, show both
+	if permitted_days > 0 and permitted_hours > 0:
+		if booking_days > 0 and booking_hours > 0:
+			booking_msg = f"{booking_days} days and {booking_hours} hours"
+		elif booking_days > 0:
+			booking_msg = f"{booking_days} days and 0 hours"
+		else:
+			booking_msg = f"0 days and {booking_hours} hours"
+		permitted_msg = f"{permitted_days} days and {permitted_hours} hours"
+
+	# If permitted is days only, show days only
+	elif permitted_days > 0 and permitted_hours == 0:
+		booking_total_days = int(booking_seconds / 86400)
+		permitted_total_days = int(permitted_seconds / 86400)
+		booking_msg = f"{booking_total_days} days"
+		permitted_msg = f"{permitted_total_days} days"
+
+	# If permitted is hours only, show hours only
+	else:
+		booking_total_hours = int(booking_seconds / 3600)
+		permitted_total_hours = int(permitted_seconds / 3600)
+		booking_msg = f"{booking_total_hours} hours"
+		permitted_msg = f"{permitted_total_hours} hours"
+
+	return f"This booking is {booking_msg} in advance, but your tier only allows bookings up to {permitted_msg} in advance."
