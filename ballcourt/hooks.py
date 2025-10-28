@@ -169,9 +169,9 @@ doc_events = {
 # ------------------------------
 #
 # Specify custom mixins to extend the standard doctype controller.
-# extend_doctype_class = {
-# 	"Task": "ballcourt.custom.task.CustomTaskMixin"
-# }
+extend_doctype_class = {
+	"Subscription": "ballcourt.ballcourt.controllers.subscription.BallcourtSubscription",
+}
 
 # Overriding Methods
 # ------------------------------
