@@ -3,6 +3,13 @@ from erpnext.accounts.doctype.subscription.subscription import Subscription
 
 class BallcourtSubscription(Subscription):
 
+	def before_insert(self):
+		# Vérifier que le client n'a pas déjà un badge
+		customer = frappe.get_doc("Customer", self.customer)
+
+		if customer.has_active_subscription():
+			frappe.throw("Veuillez annuler l'abonnement en cours avant d'en démarrer un nouveau")
+
 	def process(self):
 		super().process()
 		self.update_customer_group()
