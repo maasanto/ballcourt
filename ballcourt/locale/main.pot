@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ballcourt VERSION\n"
 "Report-Msgid-Bugs-To: antoine.maas@amingenierie-opensource.fr\n"
-"POT-Creation-Date: 2025-10-29 15:33+0009\n"
-"PO-Revision-Date: 2025-10-29 15:33+0009\n"
+"POT-Creation-Date: 2025-10-29 15:44+0009\n"
+"PO-Revision-Date: 2025-10-29 15:44+0009\n"
 "Last-Translator: antoine.maas@amingenierie-opensource.fr\n"
 "Language-Team: antoine.maas@amingenierie-opensource.fr\n"
 "MIME-Version: 1.0\n"
@@ -29,5 +29,9 @@ msgstr ""
 #. 'Customer Group'
 #: ballcourt/custom/customer_group.json
 msgid "Permitted Booking Notice"
+msgstr ""
+
+#: ballcourt/controllers/quotation.py:111
+msgid "This booking is {0} in advance, but your tier only allows bookings up to {1} in advance."
 msgstr ""
 

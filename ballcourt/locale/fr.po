@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ballcourt VERSION\n"
 "Report-Msgid-Bugs-To: antoine.maas@amingenierie-opensource.fr\n"
-"POT-Creation-Date: 2025-10-29 15:33+0009\n"
+"POT-Creation-Date: 2025-10-29 15:44+0009\n"
 "PO-Revision-Date: 2025-10-29 15:33+0009\n"
 "Last-Translator: antoine.maas@amingenierie-opensource.fr\n"
 "Language: fr\n"
@@ -20,16 +20,20 @@ msgstr ""
 
 #: ballcourt/controllers/quotation.py:28
 msgid "Booking Too Far in Advance"
-msgstr ""
+msgstr "Réservation Trop Tôt"
 
 #. Label of the custom_bookings (Tab Break) field in DocType 'Customer Group'
 #: ballcourt/custom/customer_group.json
 msgid "Bookings"
-msgstr ""
+msgstr "Réservations"
 
 #. Label of the custom_permitted_booking_notice (Duration) field in DocType
 #. 'Customer Group'
 #: ballcourt/custom/customer_group.json
 msgid "Permitted Booking Notice"
-msgstr ""
+msgstr "Préavis de Réservation Autorisé"
+
+#: ballcourt/controllers/quotation.py:111
+msgid "This booking is {0} in advance, but your tier only allows bookings up to {1} in advance."
+msgstr "Cette réservation est {0} en avance, mais votre badge ne permet seulement de réserver jusqu'à {1} en avance"
 

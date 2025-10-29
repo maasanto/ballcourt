@@ -24,7 +24,7 @@ def enforce_booking_notice(quotation, method):
 	if booking_notice_seconds > permitted_notice_seconds:
 		message = format_duration_message(booking_notice_seconds, permitted_notice_seconds)
 		frappe.throw(
-			_(message),
+			message,
 			title=_("Booking Too Far in Advance")
 		)
 
@@ -108,4 +108,4 @@ def format_duration_message(booking_seconds, permitted_seconds):
 		booking_msg = f"{booking_total_hours} hours"
 		permitted_msg = f"{permitted_total_hours} hours"
 
-	return f"This booking is {booking_msg} in advance, but your tier only allows bookings up to {permitted_msg} in advance."
+	return _("This booking is {0} in advance, but your tier only allows bookings up to {1} in advance.").format(booking_msg, permitted_msg)
