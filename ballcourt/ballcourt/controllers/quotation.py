@@ -87,25 +87,25 @@ def format_duration_message(booking_seconds, permitted_seconds):
 	# If permitted has both days and hours, show both
 	if permitted_days > 0 and permitted_hours > 0:
 		if booking_days > 0 and booking_hours > 0:
-			booking_msg = f"{booking_days} days and {booking_hours} hours"
+			booking_msg = _("{0} days and {1} hours").format(booking_days, booking_hours)
 		elif booking_days > 0:
-			booking_msg = f"{booking_days} days and 0 hours"
+			booking_msg = _("{0} days and 0 hours").format(booking_days)
 		else:
-			booking_msg = f"0 days and {booking_hours} hours"
-		permitted_msg = f"{permitted_days} days and {permitted_hours} hours"
+			booking_msg = _("0 days and {0} hours").format(booking_hours)
+		permitted_msg = _("{0} days and {1} hours").format(permitted_days, permitted_hours)
 
 	# If permitted is days only, show days only
 	elif permitted_days > 0 and permitted_hours == 0:
 		booking_total_days = int(booking_seconds / 86400)
 		permitted_total_days = int(permitted_seconds / 86400)
-		booking_msg = f"{booking_total_days} days"
-		permitted_msg = f"{permitted_total_days} days"
+		booking_msg = _("{0} days").format(booking_total_days)
+		permitted_msg = _("{0} days").format(permitted_total_days)
 
 	# If permitted is hours only, show hours only
 	else:
 		booking_total_hours = int(booking_seconds / 3600)
 		permitted_total_hours = int(permitted_seconds / 3600)
-		booking_msg = f"{booking_total_hours} hours"
-		permitted_msg = f"{permitted_total_hours} hours"
+		booking_msg = _("{0} hours").format(booking_total_hours)
+		permitted_msg = _("{0} hours").format(permitted_total_hours)
 
 	return _("This booking is {0} in advance, but your tier only allows bookings up to {1} in advance.").format(booking_msg, permitted_msg)

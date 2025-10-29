@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ballcourt VERSION\n"
 "Report-Msgid-Bugs-To: antoine.maas@amingenierie-opensource.fr\n"
-"POT-Creation-Date: 2025-10-29 15:44+0009\n"
+"POT-Creation-Date: 2025-10-29 15:54+0009\n"
 "PO-Revision-Date: 2025-10-29 15:33+0009\n"
 "Last-Translator: antoine.maas@amingenierie-opensource.fr\n"
 "Language: fr\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.13.1\n"
+
+#: ballcourt/controllers/quotation.py:94
+msgid "0 days and {0} hours"
+msgstr "0 jours et {0} heures"
 
 #: ballcourt/controllers/quotation.py:28
 msgid "Booking Too Far in Advance"
@@ -36,4 +40,22 @@ msgstr "Préavis de Réservation Autorisé"
 #: ballcourt/controllers/quotation.py:111
 msgid "This booking is {0} in advance, but your tier only allows bookings up to {1} in advance."
 msgstr "Cette réservation est {0} en avance, mais votre badge ne permet seulement de réserver jusqu'à {1} en avance"
+
+#: ballcourt/controllers/quotation.py:101
+#: ballcourt/controllers/quotation.py:102
+msgid "{0} days"
+msgstr "{0} jours"
+
+#: ballcourt/controllers/quotation.py:92
+msgid "{0} days and 0 hours"
+msgstr "{0} jours et 0 heures"
+
+#: ballcourt/controllers/quotation.py:90 ballcourt/controllers/quotation.py:95
+msgid "{0} days and {1} hours"
+msgstr "{0} jours et {0} heures"
+
+#: ballcourt/controllers/quotation.py:108
+#: ballcourt/controllers/quotation.py:109
+msgid "{0} hours"
+msgstr "{0} heures"
 
