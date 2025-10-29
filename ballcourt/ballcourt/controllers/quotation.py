@@ -16,6 +16,9 @@ def enforce_booking_notice(quotation, method):
 	if not quotation.items:
 		return
 
+	if not quotation.items[-1].item_booking:
+		return
+
 	booking_notice_seconds = calculate_booking_notice(frappe.get_doc("Item Booking", quotation.items[-1].item_booking))
 
 	if booking_notice_seconds > permitted_notice_seconds:
