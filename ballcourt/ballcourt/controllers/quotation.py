@@ -16,7 +16,7 @@ def enforce_booking_notice(quotation, method):
 	if not quotation.items:
 		return
 
-	booking_notice_seconds = calculate_booking_notice(frappe.get_doc("Resource Booking", quotation.items[-1].item_booking))
+	booking_notice_seconds = calculate_booking_notice(frappe.get_doc("Item Booking", quotation.items[-1].item_booking))
 
 	if booking_notice_seconds > permitted_notice_seconds:
 		message = format_duration_message(booking_notice_seconds, permitted_notice_seconds)
@@ -25,16 +25,16 @@ def enforce_booking_notice(quotation, method):
 			title=_("Booking Too Far in Advance")
 		)
 
-def calculate_booking_notice(resource_booking):
+def calculate_booking_notice(item_booking):
 	"""
 	Calculates the number of seconds between now and the earliest booking item date.
 	Returns the notice in seconds (integer).
 	"""
-	if not resource_booking:
+	if not item_booking:
 		return 0
 
 	# Get the start datetime and current datetime
-	start_datetime = get_datetime(resource_booking.starts_on)
+	start_datetime = get_datetime(item_booking.starts_on)
 	current_datetime = now_datetime()
 
 	# Calculate difference in seconds
