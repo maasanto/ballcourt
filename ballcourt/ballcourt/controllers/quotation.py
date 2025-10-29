@@ -84,8 +84,7 @@ def format_duration_message(booking_seconds, permitted_seconds):
 	permitted_remaining = permitted_seconds % 86400
 	permitted_hours = permitted_remaining // 3600
 
-	# If permitted has both days and hours, show both
-	if permitted_days > 0 and permitted_hours > 0:
+	if permitted_days > 0:
 		if booking_days > 0 and booking_hours > 0:
 			booking_msg = _("{0} days and {1} hours").format(booking_days, booking_hours)
 		elif booking_days > 0:
@@ -93,13 +92,6 @@ def format_duration_message(booking_seconds, permitted_seconds):
 		else:
 			booking_msg = _("0 days and {0} hours").format(booking_hours)
 		permitted_msg = _("{0} days and {1} hours").format(permitted_days, permitted_hours)
-
-	# If permitted is days only, show days only
-	elif permitted_days > 0 and permitted_hours == 0:
-		booking_total_days = int(booking_seconds / 86400)
-		permitted_total_days = int(permitted_seconds / 86400)
-		booking_msg = _("{0} days").format(booking_total_days)
-		permitted_msg = _("{0} days").format(permitted_total_days)
 
 	# If permitted is hours only, show hours only
 	else:
