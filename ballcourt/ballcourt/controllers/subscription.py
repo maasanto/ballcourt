@@ -30,4 +30,4 @@ class BallcourtSubscription(Subscription):
 				customer.customer_group = "Argent"
 			frappe.msgprint(_("Customer group updated to {0}").format(customer.customer_group))
 
-			customer.save()
+			customer.save(ignore_permissions=True)
