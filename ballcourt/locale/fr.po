@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ballcourt VERSION\n"
 "Report-Msgid-Bugs-To: antoine.maas@amingenierie-opensource.fr\n"
-"POT-Creation-Date: 2025-10-29 15:54+0009\n"
+"POT-Creation-Date: 2025-10-30 20:29+0009\n"
 "PO-Revision-Date: 2025-10-29 15:33+0009\n"
 "Last-Translator: antoine.maas@amingenierie-opensource.fr\n"
 "Language: fr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.13.1\n"
 
-#: ballcourt/controllers/quotation.py:94
+#: ballcourt/controllers/quotation.py:93
 msgid "0 days and {0} hours"
 msgstr "0 jours et {0} heures"
 
@@ -31,31 +31,30 @@ msgstr "Réservation Trop Tôt"
 msgid "Bookings"
 msgstr "Réservations"
 
+#: ballcourt/controllers/subscription.py:31
+msgid "Customer group updated to {0}"
+msgstr "Groupe de client changé en {0}"
+
 #. Label of the custom_permitted_booking_notice (Duration) field in DocType
 #. 'Customer Group'
 #: ballcourt/custom/customer_group.json
 msgid "Permitted Booking Notice"
 msgstr "Préavis de Réservation Autorisé"
 
-#: ballcourt/controllers/quotation.py:111
+#: ballcourt/controllers/quotation.py:103
 msgid "This booking is {0} in advance, but your tier only allows bookings up to {1} in advance."
 msgstr "Cette réservation est {0} en avance, mais votre badge ne permet seulement de réserver jusqu'à {1} en avance"
 
-#: ballcourt/controllers/quotation.py:101
-#: ballcourt/controllers/quotation.py:102
-msgid "{0} days"
-msgstr "{0} jours"
-
-#: ballcourt/controllers/quotation.py:92
+#: ballcourt/controllers/quotation.py:91
 msgid "{0} days and 0 hours"
 msgstr "{0} jours et 0 heures"
 
-#: ballcourt/controllers/quotation.py:90 ballcourt/controllers/quotation.py:95
+#: ballcourt/controllers/quotation.py:89 ballcourt/controllers/quotation.py:94
 msgid "{0} days and {1} hours"
 msgstr "{0} jours et {0} heures"
 
-#: ballcourt/controllers/quotation.py:108
-#: ballcourt/controllers/quotation.py:109
+#: ballcourt/controllers/quotation.py:100
+#: ballcourt/controllers/quotation.py:101
 msgid "{0} hours"
 msgstr "{0} heures"
 

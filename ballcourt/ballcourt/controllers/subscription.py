@@ -1,4 +1,5 @@
 import frappe
+from frappe import _
 from erpnext.accounts.doctype.subscription.subscription import Subscription
 
 class BallcourtSubscription(Subscription):
@@ -25,9 +26,8 @@ class BallcourtSubscription(Subscription):
 					customer.customer_group = "Or+"
 				if plan == "Badge Ligue":
 					customer.customer_group = "Ligue"
-				frappe.msgprint("Customer group updated to " + customer.customer_group)
 			elif self.status == "Cancelled":
 				customer.customer_group = "Argent"
-				frappe.msgprint("Customer group updated to " + customer.customer_group)
+			frappe.msgprint(_("Customer group updated to {0}").format(customer.customer_group))
 
-			customer.save()
+			customer.save(ignore_permissions=True)

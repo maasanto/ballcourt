@@ -91,7 +91,10 @@ def format_duration_message(booking_seconds, permitted_seconds):
 			booking_msg = _("{0} days and 0 hours").format(booking_days)
 		else:
 			booking_msg = _("0 days and {0} hours").format(booking_hours)
-		permitted_msg = _("{0} days and {1} hours").format(permitted_days, permitted_hours)
+		if permitted_hours > 0:
+			permitted_msg = _("{0} days and {1} hours").format(permitted_days, permitted_hours)
+		else:
+			permitted_msg = _("{0} days").format(permitted_days, permitted_hours)
 
 	# If permitted is hours only, show hours only
 	else:

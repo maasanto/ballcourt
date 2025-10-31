@@ -169,7 +169,7 @@ doc_events = {
 # ------------------------------
 #
 # Specify custom mixins to extend the standard doctype controller.
-extend_doctype_class = {
+override_doctype_class = {
 	"Subscription": "ballcourt.ballcourt.controllers.subscription.BallcourtSubscription",
 }
 
